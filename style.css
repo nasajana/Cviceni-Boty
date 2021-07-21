@@ -45,6 +45,7 @@ body {
     position: relative;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+    /*anebo border-radius: 8px 0 0 8px*/;
     color: white;
    
 
@@ -146,7 +147,9 @@ body {
 
  všude k li v seznamu dodám navíc parametr a jako odkaz, dodám v css styl .velikosti li { zde vše co je pro velikosti dosud a orámování dám všem, ale transparent. Kdyby nebyl border u všech, tak by mi to poskakovalo. Barevný border dám pouze u hover a u fokusu
 
-    musím se zbavit modré barvy u odkazů - inherit, odstranit podtržení text-decoration: none;
+    musím se zbavit modré barvy u odkazů - inherit, odstranit podtržení text-decoration: none; 
+
+    také dáme outline:none právě proto, aby mi prohlížeč netlačit orámování fokusu, který má vestavěný
     
     */
     padding: 0px;
@@ -163,7 +166,13 @@ body {
 
     GAP mi říká, jak velké rozestupy v px mají být mezi prvky
 
+    */
+    flex-grow: 1;
+    align-content: flex-start;
+    /* toto vyřeší problém s řazením více velikostí do více řádků při změnách velikosti
+    kupodivu mně to nedělá to, co jemu :)
 
+    align-items řeší pouze co se děje v jednom řádku, content to, co je ve více řádcích a jak jsou od sebe
     */
 }
 
@@ -177,19 +186,38 @@ body {
 }
 .tlacitko{
     color: white ;
-    text-align: center;
     text-decoration: none;
-    background-color: #f15f42;
-    padding: 1.2vw; 
-    /* zde také lepší pohrát si s flexem, toto mé řešení není ideální, hýbe se
+    background-color: #f15f42;      
+    
+    display: inline-block;
+    /*tímto prvek nebude přetékat nahoře a vlevo, chci ho tvatovat a odsune se mi od ostatního obsahu*/
+
+    
+    /*padding: 1.2vw; 
+    zde také lepší pohrát si s flexem, toto mé řešení není ideální, hýbe se
     */
     width: 130px;
     height: 40px;
     border-radius: 5px;
     position: absolute;
+
+
+/* zde je také dobré použít flex na odstavec detaily, při jiné délce textu to nedělá problém
+
+
+*/
+
     left: 30px;
     bottom: 30px;
+    text-align: center;
 }
+.tlacitko:hover,
+.tlacitko:focus{
+    /*dodat mu barvu ppzadí-písma*/
+}
+
+
+
 
 /* jako první je dobré řešit fonty
 pak pokračovat podle toho co nás baví, třeba začít dlaždicí, 
@@ -206,7 +234,5 @@ b/ display:flex a pak justify-content: center
 display flex dá prvky vedle sebe - tím kartičku polovinama místo pod sebe dám vedle sebe
 
 flex-basis: 50% bude říkat, že prvky mají být polovinou, když ale nemůže toto dodržet, tak tlačí na druhou stranu, to se dá řešit zvlášť
-
-
 
 */
