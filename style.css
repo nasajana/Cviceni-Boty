@@ -39,7 +39,9 @@ body {
 }
 .vizual{
     background: linear-gradient(#06d7c1,#50cc49);
+    /*color highlight v extension - doplněk ke stažení ukáže obdélníček s náhledem barvy na jejím názvu*/
     width: 50%;
+    /* zde viz komentář ohledně flex basis*/
     position: relative;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
@@ -100,6 +102,13 @@ body {
     position: absolute;
     left: -80px;
     top: 140px;
+    /* jiný způsob je použít záporný margin
+    margin left: mínus něco a doladím v náhledu... cca -120px
+    margin bottom: -56 zde zarovnávám k textu, který tam pod botou mám
+
+    pro zarovnání té boty dolů použít flex box, dá to prvky vedle sebe, pak flex-direction column, vrátí to pod sebe, no a pak dát flex-grow: 1 a ono to samo odtlačí obrázek dolů a pružně reaguje volným místem nahoře
+    
+    */
 }
 
 .cena{
@@ -122,15 +131,47 @@ body {
     display: flex;
     width: 100%;
     list-style-type: none;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
+    gap: 10px 20px;
+
+    /* první číslo po řádcích, druhé na výšku, stačí uvést jedno a to bude v řádku vedle sebe*/
+
+    flex-wrap: wrap;
+
+    /* ten wrap je proto, aby mi neutíkaly v řádku ostatní velikosti, když jich bude víc*/
+
+
     align-items: center;
+ /*toto zarovná čísla, ale je jiná možnost, udělat ty číslíčka jako odkazy
+
+ všude k li v seznamu dodám navíc parametr a jako odkaz, dodám v css styl .velikosti li { zde vše co je pro velikosti dosud a orámování dám všem, ale transparent. Kdyby nebyl border u všech, tak by mi to poskakovalo. Barevný border dám pouze u hover a u fokusu
+
+    musím se zbavit modré barvy u odkazů - inherit, odstranit podtržení text-decoration: none;
+    
+    */
     padding: 0px;
+    /* těch původních 40px pro výchozí odsazení ul seznamu můžu odstranit takto, 
+    padding-inline-start: mi třeba říká, že mezera u odrážek bude tam, kde lidi čtou zleva doprava, ale třeba arabština to tak nemá, proto už se nepoužívá left a right padding */
         
+    /*
+    display flex se mi seředí vedle sebe místo pod sebe
+
+    u toho odsazení můžu dát položky i do margin, ale toto není praktické, zase tedy použiju flex
+    space-between není vhodná, kdyby byly pouze 2-3 velikosti, tak se to strašně roztáhne
+
+    existuje vlastnost GAP, už je víc podporována (kontrola v can-i-use!!)
+
+    GAP mi říká, jak velké rozestupy v px mají být mezi prvky
+
+
+    */
 }
 
 .vybrana{
     color: red;
     border: 1px solid;
+    /* zde nedám tu barvu, dám ji samostatně do color, kdyby zákazník měnil barvy, tak bude na jeden zátah změněná v color
+    */
     border-radius: 50%;
     padding: 3px;
 }
@@ -139,7 +180,9 @@ body {
     text-align: center;
     text-decoration: none;
     background-color: #f15f42;
-    padding: 1.2vw;
+    padding: 1.2vw; 
+    /* zde také lepší pohrát si s flexem, toto mé řešení není ideální, hýbe se
+    */
     width: 130px;
     height: 40px;
     border-radius: 5px;
@@ -148,3 +191,22 @@ body {
     bottom: 30px;
 }
 
+/* jako první je dobré řešit fonty
+pak pokračovat podle toho co nás baví, třeba začít dlaždicí, 
+
+v HTML kouknu co je do čeho zabalené
+
+je dobré používat pouze omezení shora místo pevné velikosti-- kvůli responzivitě
+
+zarámování a pozadí dlaždice
+rámec - jak vystředit
+a/ margin:auto - ponecháme co je kratší, jinak je to prý jedno
+b/ display:flex a pak justify-content: center
+
+display flex dá prvky vedle sebe - tím kartičku polovinama místo pod sebe dám vedle sebe
+
+flex-basis: 50% bude říkat, že prvky mají být polovinou, když ale nemůže toto dodržet, tak tlačí na druhou stranu, to se dá řešit zvlášť
+
+
+
+*/
